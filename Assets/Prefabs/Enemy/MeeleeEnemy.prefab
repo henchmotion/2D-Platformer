@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 732274706334195522}
   - component: {fileID: 6224417333571129033}
   - component: {fileID: 7195322430233284374}
+  - component: {fileID: 5434855660360397285}
   m_Layer: 9
   m_Name: MeeleeEnemy
   m_TagString: Enemy
@@ -169,6 +170,9 @@ MonoBehaviour:
   startingHealth: 3
   iframesDuration: 0
   numberOfflashes: 0
+  components:
+  - {fileID: 7195322430233284374}
+  deathSound: {fileID: 8300000, guid: f8d5dbeac8d61a048a22f7c4264bab56, type: 3}
 --- !u!114 &7195322430233284374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,9 +187,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackCooldown: 2
   range: 2.5
-  colliderDistance: 0.45
   damage: 2
+  colliderDistance: 0.45
   boxCollider: {fileID: 732274706334195522}
   playerLayer:
     serializedVersion: 2
     m_Bits: 256
+  attackSound: {fileID: 8300000, guid: ffa2ffe88c78f7b4f99b406f4391d1d3, type: 3}
+--- !u!114 &5434855660360397285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8893695451520980951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a863118a1ca996f46987fc1f86428409, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1

@@ -16,6 +16,13 @@ public class Health : MonoBehaviour
      [SerializeField] private int numberOfflashes;
      private SpriteRenderer spriteRend;
 
+     [Header ("Components")]
+     [SerializeField] private Behaviour[] components;
+     private bool Invunerable;
+
+     [Header ("Death Sound")]
+     [SerializeField] private AudioClip deathSound;
+
     public void Awake()
     {
         currentHealth = startingHealth;
@@ -25,6 +32,7 @@ public class Health : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        if (Invunerable) return;
         currentHealth = Mathf.Clamp(currentHealth - _damage, 0, startingHealth);
 
         if (currentHealth > 0)
@@ -38,18 +46,14 @@ public class Health : MonoBehaviour
             {
                 anim.SetTrigger("Die");
 
-                // Player
-                if (GetComponent<PlayerMovement>() != null)
-                    GetComponent<PlayerMovement>().enabled = false;
-
-                // Enemy
-                if (GetComponent<EnemyPatrol>() != null)
-                GetComponentInParent<EnemyPatrol>().enabled =false;
-
-                if (GetComponent<MeleeEnemy>() != null)
-                GetComponent<MeleeEnemy>().enabled = false;
+            // Deactivate all attached components
+                foreach (Behaviour component in components)
+                {
+                    component.enabled = false;
+                }
 
                 dead = true;
+                SoundManager.instance.PlaySound(deathSound);
             }
             
         }
@@ -61,6 +65,7 @@ public class Health : MonoBehaviour
 
     private IEnumerator Invunerability()
     {
+        Invunerable = true;
         Physics2D.IgnoreLayerCollision(8, 9, true);
         for (int i = 0; i < numberOfflashes; i++)
         {
@@ -71,6 +76,12 @@ public class Health : MonoBehaviour
         }
         
          Physics2D.IgnoreLayerCollision(8, 9, false);
+         Invunerable = false;
+    }
+
+    private void Deactivate()
+    {
+        gameObject.SetActive(false);
     }
 }
 

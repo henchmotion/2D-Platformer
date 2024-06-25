@@ -21,6 +21,9 @@ public class RangeEnemy : MonoBehaviour
     [Header ("Player Layers")]
     [SerializeField] private LayerMask playerLayer;
     private float cooldownTimer = Mathf.Infinity;
+
+    [Header ("Fireball Sound")]
+    [SerializeField] private AudioClip fireballSound;
     
     // References
     private Animator anim;
@@ -53,6 +56,7 @@ public class RangeEnemy : MonoBehaviour
 
     private void RangeAttack()
     {
+        SoundManager.instance.PlaySound(fireballSound);
         cooldownTimer = 0;
         fireballs[FindFireball()].transform.position = firepoint.position;
         fireballs[FindFireball()].GetComponent<EnemyProjectiles>().ActivateProjectile();   
