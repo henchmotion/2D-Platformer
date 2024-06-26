@@ -15,6 +15,9 @@ public class PlayerMovement : MonoBehaviour
    private float wallJumpCooldown;
    private float horizontalInput;
 
+   [Header ("SFX")]
+  [SerializeField] private AudioClip jumpSound;
+
     private void Awake()
     {
         // Grab references for rigidbody and animator from object
@@ -52,7 +55,15 @@ public class PlayerMovement : MonoBehaviour
                 else
                 body.gravityScale = 7;
                 if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow))
+                {
                     jump();
+
+                    if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow) && isGrounded())
+                        SoundManager.instance.PlaySound(jumpSound);
+                    
+                }
+                    
+
             }
             else
             wallJumpCooldown += Time.deltaTime;
@@ -61,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
     private void jump()
     {
          if (isGrounded())
-         {
+         {  
             body.velocity = new UnityEngine.Vector2(body.velocity.x, jumpPower);
             anim.SetTrigger("jump");
          }
