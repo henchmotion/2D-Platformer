@@ -208,12 +208,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   jumpPower: 20
+  coyoteTime: 0
+  extraJumps: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   wallLayer:
     serializedVersion: 2
     m_Bits: 128
+  jumpSound: {fileID: 0}
 --- !u!95 &963830681220968363
 Animator:
   serializedVersion: 5
@@ -280,3 +283,4 @@ MonoBehaviour:
   - {fileID: 9210516842426279778}
   - {fileID: 5186791560001029457}
   deathSound: {fileID: 8300000, guid: f8d5dbeac8d61a048a22f7c4264bab56, type: 3}
+  hurtSound: {fileID: 0}
