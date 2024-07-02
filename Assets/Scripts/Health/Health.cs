@@ -70,14 +70,14 @@ public class Health : MonoBehaviour
     }
 
     public void Respawn()
-    {
+    { 
         dead = false;
         AddHealth(startingHealth);
         anim.ResetTrigger("Die");
         anim.Play("Idle");
         StartCoroutine(Invunerability());
 
-        // Acactivate all attached components
+        // Activate all attached components
         foreach (Behaviour component in components)
             component.enabled = true;
             
